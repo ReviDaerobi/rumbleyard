@@ -106,6 +106,6 @@
 
 <p class="mt-10 text-center text-sm text-gray-500">
     Belum punya akun?
-    <a href="{{ route('register') }}" class="font-semibold text-figma-blue hover:underline">Daftarkan Fasilitas</a>
+    <a href="{{ route('register') }}" class="font-semibold text-figma-blue hover:underline">Daftar</a>
 </p>
 @endsection
