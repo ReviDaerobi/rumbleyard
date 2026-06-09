@@ -33,7 +33,7 @@
 
         <div class="relative" data-aos="fade-left">
             <img
-                src="https://images.unsplash.com/photo-1554068865-24cecd4e1bad?w=800&h=600&fit=crop"
+                src="https://i.pinimg.com/1200x/ef/f3/ee/eff3ee2f0b1a53227187312402baf20b.jpg"
                 alt="Lapangan tenis profesional"
                 class="w-full rounded-2xl shadow-xl object-cover aspect-[4/3]"
             >
@@ -77,10 +77,12 @@
 {{-- How it Works --}}
 <section class="bg-figma-surface py-16 lg:py-20">
     <div class="max-w-7xl mx-auto px-4 text-center">
-        <h2 class="section-title" data-aos="fade-up">Mulai Bermain dalam Hitungan Menit</h2>
-        <p class="section-subtitle mt-2 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="50">
-            Tiga langkah mudah untuk memesan tempat latihan atau pertandingan yang sempurna bagi Anda
-        </p>
+        <div class="flex flex-wrap items-center justify-center gap-x-3 gap-y-1" data-aos="fade-up">
+            <h2 class="section-title">Mulai Bermain dalam Hitungan Menit</h2>
+            <p class="section-subtitle">
+                Tiga langkah mudah untuk memesan tempat latihan atau pertandingan yang sempurna bagi Anda
+            </p>
+        </div>
         <div class="mt-12 grid md:grid-cols-3 gap-8">
             @foreach([
                 ['icon' => 'search', 'title' => 'Cari Lapangan', 'desc' => 'Jelajahi lapangan terdekat berdasarkan olahraga, lokasi, dan harga yang sesuai kebutuhan Anda.'],

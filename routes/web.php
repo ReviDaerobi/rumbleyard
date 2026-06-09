@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\Auth\LoginController as AdminLoginController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\DashboardController;
@@ -49,6 +50,11 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'role:venue_owner|admin'])->prefix('owner')->name('owner.')->group(function () {
     Route::get('/dashboard', [OwnerDashboardController::class, 'index'])->name('dashboard');
     Route::resource('venues', OwnerVenueController::class)->except(['show', 'destroy']);
+});
+
+Route::middleware('guest')->prefix('admin')->name('admin.')->group(function () {
+    Route::get('login', [AdminLoginController::class, 'create'])->name('login');
+    Route::post('login', [AdminLoginController::class, 'store']);
 });
 
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
