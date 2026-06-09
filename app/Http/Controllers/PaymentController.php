@@ -12,7 +12,7 @@ class PaymentController extends Controller
     public function show(Payment $payment): View
     {
         $this->authorize('pay', $payment->booking);
-        $payment->load(['booking.venue']);
+        $payment->load(['booking.venue.images']);
 
         return view('payments.show', compact('payment'));
     }

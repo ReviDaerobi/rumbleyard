@@ -42,10 +42,7 @@ class BookingController extends Controller
         $payment = $this->paymentService->createForBooking($booking);
         $payment->update(['meta' => ['method' => $method]]);
 
-        return redirect()->route('payments.mock.checkout', [
-            'payment' => $payment,
-            'method' => $method,
-        ]);
+        return redirect()->route('payments.show', $payment);
     }
 
     public function show(Booking $booking): View
