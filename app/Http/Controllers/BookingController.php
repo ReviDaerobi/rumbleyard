@@ -18,7 +18,7 @@ class BookingController extends Controller
         protected PaymentService $paymentService,
         protected BookingRepositoryInterface $bookings,
     ) {
-        $this->middleware('auth');
+        
     }
 
     public function create(Venue $venue): View
