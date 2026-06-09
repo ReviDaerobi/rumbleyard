@@ -38,9 +38,14 @@ class BookingController extends Controller
             return back()->withInput()->withErrors(['start_time' => $e->getMessage()]);
         }
 
+        $method = $request->input('payment_method', 'bank');
         $payment = $this->paymentService->createForBooking($booking);
+        $payment->update(['meta' => ['method' => $method]]);
 
-        return redirect()->route('payments.show', $payment);
+        return redirect()->route('payments.mock.checkout', [
+            'payment' => $payment,
+            'method' => $method,
+        ]);
     }
 
     public function show(Booking $booking): View

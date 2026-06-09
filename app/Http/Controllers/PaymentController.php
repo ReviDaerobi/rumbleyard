@@ -9,23 +9,22 @@ use Illuminate\View\View;
 
 class PaymentController extends Controller
 {
-    public function __construct()
-    {
-      
-    }
-
     public function show(Payment $payment): View
     {
         $this->authorize('pay', $payment->booking);
-        $payment->load(['booking.venue.images']);
+        $payment->load(['booking.venue']);
 
         return view('payments.show', compact('payment'));
     }
 
-    public function mockCheckout(Payment $payment): View
+    public function mockCheckout(Payment $payment): View|RedirectResponse
     {
         $this->authorize('pay', $payment->booking);
         $payment->load(['booking.venue']);
+
+        if ($payment->isPaid()) {
+            return redirect()->route('bookings.success', $payment->booking);
+        }
 
         return view('payments.mock-checkout', compact('payment'));
     }
@@ -33,6 +32,11 @@ class PaymentController extends Controller
     public function mockPay(Payment $payment, MockPaymentGateway $gateway): RedirectResponse
     {
         $this->authorize('pay', $payment->booking);
+
+        if ($method = request('method')) {
+            $payment->update(['meta' => array_merge($payment->meta ?? [], ['method' => $method])]);
+        }
+
         $gateway->simulateSuccess($payment);
 
         return redirect()->route('bookings.success', $payment->booking);

@@ -31,8 +31,10 @@ class BookingService
         }
 
         $subtotal = $venue->price_per_hour * $duration;
+        $serviceFee = 5000;
+        $total = $subtotal + $serviceFee;
 
-        return DB::transaction(function () use ($user, $venue, $data, $date, $startTime, $endTime, $duration, $subtotal) {
+        return DB::transaction(function () use ($user, $venue, $data, $date, $startTime, $endTime, $duration, $subtotal, $total) {
             if ($this->bookings->hasConflict($venue->id, $date, $startTime, $endTime)) {
                 throw new InvalidArgumentException('Slot waktu sudah dibooking.');
             }
@@ -49,7 +51,7 @@ class BookingService
                 'notes' => $data['notes'] ?? null,
                 'status' => BookingStatus::Pending,
                 'subtotal' => $subtotal,
-                'total' => $subtotal,
+                'total' => $total,
             ]);
 
             $slotStart = $startTime;

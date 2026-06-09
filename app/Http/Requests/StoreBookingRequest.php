@@ -19,6 +19,7 @@ class StoreBookingRequest extends FormRequest
             'duration_hours' => ['required', 'integer', 'min:1', 'max:8'],
             'players_count' => ['nullable', 'integer', 'min:1', 'max:50'],
             'notes' => ['nullable', 'string', 'max:500'],
+            'payment_method' => ['nullable', 'string', 'in:bank,ewallet,card'],
         ];
     }
 }

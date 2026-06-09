@@ -88,4 +88,20 @@
     .peer:checked ~ .facility-pill {
         @apply bg-figma-blue border-figma-blue text-white;
     }
+
+    .booking-select {
+        @apply focus:border-figma-blue focus:ring-1 focus:ring-figma-blue focus:outline-none;
+    }
+
+    .payment-option {
+        @apply flex items-center gap-3 rounded-xl border border-gray-200 bg-white p-3.5 cursor-pointer transition hover:border-gray-300;
+    }
+
+    .payment-option-active {
+        @apply border-figma-blue bg-figma-blue/5;
+    }
+
+    .payment-option-icon {
+        @apply shrink-0 h-9 w-9 rounded-lg bg-figma-surface flex items-center justify-center text-figma-blue;
+    }
 }
