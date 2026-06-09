@@ -1,7 +1,9 @@
 @php
     $links = match(true) {
         auth()->user()->isAdmin() => [
-            ['route' => 'admin.dashboard', 'label' => 'Overview', 'icon' => 'layout-dashboard'],
+            ['route' => 'admin.dashboard', 'label' => 'Overview', 'icon' => 'layout-dashboard', 'active' => 'admin.dashboard'],
+            ['route' => 'admin.venues.index', 'label' => 'Venues', 'icon' => 'map-pin', 'active' => 'admin.venues.*'],
+            ['route' => 'admin.bookings.index', 'label' => 'Bookings', 'icon' => 'calendar', 'active' => 'admin.bookings.*'],
         ],
         auth()->user()->isVenueOwner() => [
             ['route' => 'owner.dashboard', 'label' => 'Overview', 'icon' => 'layout-dashboard'],
@@ -20,7 +22,7 @@
     <nav class="px-3 space-y-1">
         @foreach($links as $link)
             <a href="{{ route($link['route']) }}"
-               class="flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-medium {{ request()->routeIs($link['route'].'*') ? 'bg-primary text-white' : 'text-gray-600 hover:bg-gray-100' }}">
+               class="flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-medium {{ request()->routeIs($link['active'] ?? $link['route'].'*') ? 'bg-primary text-white' : 'text-gray-600 hover:bg-gray-100' }}">
                 <i data-lucide="{{ $link['icon'] }}" class="w-4 h-4"></i>
                 {{ $link['label'] }}
             </a>

@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\Admin\Auth\LoginController as AdminLoginController;
+use App\Http\Controllers\Admin\BookingController as AdminBookingController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\VenueController as AdminVenueController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FavoriteController;
@@ -59,6 +61,8 @@ Route::middleware('guest')->prefix('admin')->name('admin.')->group(function () {
 
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
+    Route::resource('venues', AdminVenueController::class)->except(['show']);
+    Route::resource('bookings', AdminBookingController::class);
 });
 
 require __DIR__.'/auth.php';

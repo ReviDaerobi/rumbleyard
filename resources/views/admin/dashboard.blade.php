@@ -3,6 +3,10 @@
 @section('header', 'Admin Dashboard')
 
 @section('content')
+<div class="flex flex-wrap gap-3 mb-6">
+    <a href="{{ route('admin.venues.index') }}" class="btn-secondary">Kelola Venues</a>
+    <a href="{{ route('admin.bookings.index') }}" class="btn-outline">Kelola Bookings</a>
+</div>
 <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
     @foreach(['users' => 'Pengguna', 'venues' => 'Venue', 'bookings' => 'Booking', 'revenue' => 'Pendapatan'] as $key => $label)
         <div class="card-soft p-5">
