@@ -1,0 +1,91 @@
+@import 'tailwindcss';
+@import 'flowbite';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+@source '../../node_modules/flowbite/**/*.js';
+
+@theme {
+    --font-sans: 'Poppins', ui-sans-serif, system-ui, sans-serif;
+    --color-primary: #11224b;
+    --color-secondary: #126ddd;
+    --color-accent: #546e7a;
+    --color-surface: #ffffff;
+    --color-figma-navy: #11224b;
+    --color-figma-blue: #126ddd;
+    --color-figma-gray: #d9d9d9;
+    --color-figma-surface: #f8fafc;
+    --color-heading: #333333;
+    --color-body: #546e7a;
+}
+
+@layer base {
+    body {
+        @apply bg-surface text-primary antialiased;
+    }
+
+    [x-cloak] {
+        display: none !important;
+    }
+}
+
+@layer components {
+    .glass {
+        @apply bg-white/70 backdrop-blur-md border border-white/40 shadow-sm;
+    }
+
+    .card-soft {
+        @apply rounded-2xl bg-white shadow-sm border border-gray-100 transition hover:-translate-y-0.5 hover:shadow-md;
+    }
+
+    .btn-primary {
+        @apply inline-flex items-center justify-center rounded-xl bg-figma-blue px-5 py-2.5 text-sm font-semibold text-white uppercase tracking-wide transition hover:bg-blue-700;
+    }
+
+    .btn-secondary {
+        @apply inline-flex items-center justify-center rounded-xl bg-figma-blue px-5 py-2.5 text-sm font-semibold text-white uppercase tracking-wide transition hover:bg-blue-700;
+    }
+
+    .btn-outline {
+        @apply inline-flex items-center justify-center rounded-xl border border-gray-200 bg-white px-5 py-2.5 text-sm font-semibold text-primary transition hover:border-gray-300;
+    }
+
+    .btn-nav {
+        @apply inline-flex items-center gap-2 rounded-lg bg-figma-blue px-4 py-2 text-xs font-bold uppercase tracking-wide text-white transition hover:bg-blue-700;
+    }
+
+    .section-title {
+        @apply text-3xl lg:text-4xl font-bold text-heading leading-tight;
+    }
+
+    .section-subtitle {
+        @apply text-3xl lg:text-4xl font-bold text-figma-blue leading-tight;
+    }
+
+    .slot-available {
+        @apply border-green-200 bg-green-50 text-green-700;
+    }
+
+    .slot-booked {
+        @apply border-red-200 bg-red-50 text-red-400 cursor-not-allowed;
+    }
+
+    .slot-selected {
+        @apply border-blue-400 bg-blue-50 text-blue-700 ring-2 ring-blue-300;
+    }
+
+    .filter-sidebar {
+        @apply bg-figma-surface;
+    }
+
+    .facility-pill {
+        @apply inline-block rounded-full border border-gray-200 bg-white px-3 py-1.5 text-xs font-medium text-body transition cursor-pointer hover:border-figma-blue/40;
+    }
+
+    .facility-pill-active,
+    .peer:checked ~ .facility-pill {
+        @apply bg-figma-blue border-figma-blue text-white;
+    }
+}
