@@ -16,12 +16,12 @@ class GoogleController extends Controller
 
     public function redirect(): RedirectResponse
     {
-        return Socialite::driver('google')->redirect();
+        return Socialite::driver('google')->stateless()->redirect();
     }
 
     public function callback(): RedirectResponse
     {
-        $googleUser = Socialite::driver('google')->user();
+         $googleUser = Socialite::driver('google')->stateless()->user();
 
         $user = User::query()->where('google_id', $googleUser->getId())
             ->orWhere('email', $googleUser->getEmail())
