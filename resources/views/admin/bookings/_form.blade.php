@@ -1,3 +1,4 @@
+@php $booking ??= null; @endphp
 <div>
     <label class="text-sm font-medium">Pelanggan</label>
     <select name="user_id" required class="w-full rounded-2xl border-gray-200 mt-1">

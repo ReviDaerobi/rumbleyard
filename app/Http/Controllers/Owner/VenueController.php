@@ -23,6 +23,8 @@ class VenueController extends Controller
     {
         return view('owner.venues.create', [
             'sports' => Sport::where('is_active', true)->orderBy('sort_order')->get(),
+            'owners' => User::role('venue_owner')->get(), // sesuaikan
+            'venue' => null, // ← tambah ini
         ]);
     }
 
