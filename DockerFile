@@ -1,0 +1,28 @@
+# Stage 1: Build assets dengan Node
+FROM node:20-alpine AS node_build
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+RUN npm run build
+
+# Stage 2: PHP + Composer
+FROM php:8.3-fpm-alpine AS php_base
+RUN apk add --no-cache nginx supervisor libpng-dev libzip-dev zip unzip git \
+    && docker-php-ext-install pdo pdo_mysql zip gd
+
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+
+WORKDIR /var/www/html
+COPY . .
+COPY --from=node_build /app/public/build ./public/build
+
+RUN composer install --no-dev --optimize-autoloader
+
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+
+EXPOSE 8080
+
+COPY docker/start.sh /start.sh
+RUN chmod +x /start.sh
+CMD ["/start.sh"]
