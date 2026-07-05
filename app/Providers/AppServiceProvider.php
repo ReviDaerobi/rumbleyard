@@ -33,5 +33,9 @@ class AppServiceProvider extends ServiceProvider
 
         Event::listen(BookingCreated::class, SendBookingNotification::class);
         Event::listen(PaymentCompleted::class, LogPaymentActivity::class);
+
+        if ($this->app->environment('production')) {
+            URL::forceScheme('https');
+        }
     }
 }
